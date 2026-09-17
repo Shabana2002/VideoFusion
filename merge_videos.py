@@ -28,6 +28,10 @@ VIDEO_EXTENSIONS = {
     ".flv", ".wmv", ".ts", ".mts", ".m2ts",
 }
 
+AUDIO_EXTENSIONS = {
+    ".mp3", ".aac", ".wav", ".m4a", ".flac", ".ogg", ".wma", ".opus",
+}
+
 TARGET_WIDTH = 1920
 TARGET_HEIGHT = 1080
 
@@ -255,6 +259,78 @@ def concat_videos(ffmpeg_path: str, list_file: Path, output_path: Path) -> None:
     if result.returncode != 0:
         tail = "\n".join(result.stderr.strip().splitlines()[-15:])
         raise MergeError(f"FFmpeg failed while merging the normalized clips:\n{tail}")
+
+
+def get_duration(ffprobe_path: str, path: Path) -> float:
+    """Return the duration (in seconds) of a media file via ffprobe."""
+    cmd = [
+        ffprobe_path, "-v", "error",
+        "-show_entries", "format=duration",
+        "-of", "default=noprint_wrappers=1:nokey=1",
+        str(path),
+    ]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    if result.returncode != 0:
+        raise MergeError(f"Could not read duration of '{path.name}' with ffprobe:\n{result.stderr.strip()}")
+    try:
+        return float(result.stdout.strip())
+    except ValueError:
+        raise MergeError(f"Could not determine the duration of '{path.name}'.")
+
+
+def probe_audio(ffprobe_path: str, path: Path) -> dict:
+    """Validate that a file has an audio stream and return basic info about it."""
+    info = run_ffprobe(ffprobe_path, path)
+
+    audio_stream = next((s for s in info["streams"] if s.get("codec_type") == "audio"), None)
+    if audio_stream is None:
+        raise MergeError(f"'{path.name}' has no audio stream — please choose a valid audio file.")
+
+    duration = 0.0
+    try:
+        duration = float(info.get("format", {}).get("duration") or 0.0)
+    except (TypeError, ValueError):
+        duration = 0.0
+    if duration <= 0:
+        duration = get_duration(ffprobe_path, path)
+
+    return {
+        "path": path,
+        "codec": audio_stream.get("codec_name", "?"),
+        "duration": duration,
+    }
+
+
+def merge_audio_into_video(
+    ffmpeg_path: str,
+    video_path: Path,
+    video_duration: float,
+    audio_path: Path,
+    output_path: Path,
+) -> None:
+    """Replace a video's audio track with the given audio file.
+
+    The video stream is copied untouched (no re-encoding) and its original
+    duration is preserved exactly: audio shorter than the video is padded
+    with silence, audio longer than the video is trimmed, so the output is
+    never shorter or longer than the source video.
+    """
+    cmd = [
+        ffmpeg_path, "-y",
+        "-i", str(video_path),
+        "-i", str(audio_path),
+        "-map", "0:v:0", "-map", "1:a:0",
+        "-c:v", "copy",
+        "-af", "apad",
+        "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2",
+        "-t", f"{video_duration:.3f}",
+        "-movflags", "+faststart",
+        str(output_path),
+    ]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    if result.returncode != 0:
+        tail = "\n".join(result.stderr.strip().splitlines()[-15:])
+        raise MergeError(f"FFmpeg failed while merging audio into the video:\n{tail}")
 
 
 def main():
