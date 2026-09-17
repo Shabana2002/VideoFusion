@@ -41,22 +41,19 @@ CARDS = [
         "key": "Merge Videos",
         "icon": "🎬",
         "title": "Merge Videos",
-        "desc": "Combine multiple videos into one video.",
-        "button": "Merge Videos →",
+        "desc": "Combine multiple video files into one video.",
     },
     {
         "key": "Add / Replace Audio",
         "icon": "🎵",
         "title": "Add / Replace Audio",
         "desc": "Add music, narration, or another audio track to a video.",
-        "button": "Add Audio →",
     },
     {
         "key": "Merge Videos + Audio",
         "icon": "🎬🎵",
         "title": "Merge Videos + Audio",
         "desc": "Combine multiple videos and add an audio track.",
-        "button": "Create Video →",
     },
 ]
 
@@ -86,48 +83,42 @@ st.markdown(
         --vf-accent-dark: #4338CA;
         --vf-text: #0F172A;
         --vf-muted: #64748B;
-        --vf-bg: #F8FAFC;
         --vf-border: #E2E8F0;
     }
 
     html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
-    .stApp { background-color: var(--vf-bg); }
-    .block-container { max-width: 1100px; padding-top: 2.5rem; margin: 0 auto; }
+    .block-container { max-width: 1050px; padding-top: 1.5rem; padding-bottom: 2rem; margin: 0 auto; }
 
-    .vf-hero { text-align: center; padding: 0.5rem 0 1.5rem 0; }
-    .vf-hero-icon { font-size: 3rem; line-height: 1; margin-bottom: 0.25rem; }
+    .vf-hero { text-align: center; padding: 0 0 0.75rem 0; }
+    .vf-hero-icon { font-size: 2.2rem; line-height: 1; margin-bottom: 0.1rem; }
     .vf-hero h1 {
-        font-size: 2.4rem; font-weight: 800; color: var(--vf-text);
-        margin: 0.1rem 0 0.3rem 0; letter-spacing: -0.02em;
+        font-size: 2rem; font-weight: 800; color: var(--vf-text);
+        margin: 0.1rem 0 0.15rem 0; letter-spacing: -0.02em;
     }
     .vf-tagline {
-        font-size: 1.15rem; font-weight: 600; color: var(--vf-accent);
-        margin: 0 0 0.6rem 0;
+        font-size: 1rem; font-weight: 600; color: var(--vf-accent);
+        margin: 0 0 0.4rem 0;
     }
-    .vf-sub { font-size: 1.02rem; color: var(--vf-muted); max-width: 560px; margin: 0 auto; }
+    .vf-sub { font-size: 0.95rem; color: var(--vf-muted); max-width: 520px; margin: 0 auto; }
 
     h2.vf-section-title {
-        text-align: center; font-size: 1.3rem; font-weight: 700;
-        color: var(--vf-text); letter-spacing: 0.02em; margin: 1.8rem 0 1.2rem 0;
+        text-align: center; font-size: 1.2rem; font-weight: 700;
+        color: var(--vf-text); letter-spacing: 0.02em; margin: 0 0 0.9rem 0;
     }
+    .vf-section { margin-top: 2.6rem; }
 
-    .vf-card-icon { font-size: 2rem; margin-bottom: 0.3rem; }
-    .vf-card-title { font-size: 1.15rem; font-weight: 700; color: var(--vf-text); margin-bottom: 0.3rem; }
-    .vf-card-desc { font-size: 0.92rem; color: var(--vf-muted); margin-bottom: 0.6rem; min-height: 2.6rem; }
+    .vf-card-icon { font-size: 1.7rem; margin-bottom: 0.2rem; }
+    .vf-card-title { font-size: 1.05rem; font-weight: 700; color: var(--vf-text); margin-bottom: 0.2rem; }
+    .vf-card-desc { font-size: 0.87rem; color: var(--vf-muted); margin-bottom: 0.5rem; min-height: 2.3rem; }
 
     div[data-testid="stVerticalBlockBorderWrapper"] {
-        border-radius: 14px !important;
+        border-radius: 12px !important;
         border: 1px solid var(--vf-border) !important;
         box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
-        transition: box-shadow 0.15s ease, transform 0.15s ease;
-    }
-    div[data-testid="stVerticalBlockBorderWrapper"]:hover {
-        box-shadow: 0 8px 20px rgba(79, 70, 229, 0.12);
-        transform: translateY(-2px);
     }
 
     .stButton > button {
-        border-radius: 10px; font-weight: 600; padding: 0.5rem 1.1rem;
+        border-radius: 8px; font-weight: 600; padding: 0.45rem 1rem;
     }
     .stButton > button[kind="primary"] {
         background-color: var(--vf-accent); border-color: var(--vf-accent);
@@ -136,19 +127,26 @@ st.markdown(
         background-color: var(--vf-accent-dark); border-color: var(--vf-accent-dark);
     }
 
-    .vf-op-title { font-size: 1.5rem; font-weight: 700; color: var(--vf-text); margin-bottom: 0.1rem; }
-    .vf-op-desc { color: var(--vf-muted); margin-bottom: 0.8rem; }
+    .vf-op-title { font-size: 1.35rem; font-weight: 700; color: var(--vf-text); margin-bottom: 0.1rem; }
+    .vf-op-desc { color: var(--vf-muted); margin-bottom: 0.6rem; font-size: 0.95rem; }
     .vf-meta { font-size: 0.85rem; color: var(--vf-muted); }
 
     .vf-info-card {
         background: #EEF2FF; border: 1px solid #C7D2FE; border-radius: 10px;
-        padding: 0.9rem 1.1rem; font-size: 0.9rem; color: var(--vf-text); margin: 0.8rem 0;
+        padding: 0.75rem 1rem; font-size: 0.88rem; color: var(--vf-text); margin: 0.6rem 0;
     }
     .vf-info-card b { color: var(--vf-accent-dark); }
 
+    .vf-benefit-title { font-weight: 700; color: var(--vf-text); font-size: 0.95rem; margin-bottom: 0.15rem; }
+    .vf-benefit-desc { font-size: 0.85rem; color: var(--vf-muted); }
+
+    .vf-footer { text-align: center; color: var(--vf-muted); font-size: 0.85rem; padding: 0.5rem 0 0.5rem 0; }
+    .vf-footer b { color: var(--vf-text); }
+
     @media (max-width: 640px) {
-        .vf-hero h1 { font-size: 1.9rem; }
-        .block-container { padding-top: 1.2rem; }
+        .vf-hero h1 { font-size: 1.7rem; }
+        .block-container { padding-top: 1rem; }
+        .vf-section { margin-top: 1.8rem; }
     }
     </style>
     """,
@@ -232,26 +230,19 @@ def show_error(user_message: str, technical_detail: str):
         st.code(technical_detail)
 
 
-def show_output(video_bytes: bytes, file_name: str, download_key: str, clear_key: str, on_clear):
+def show_output(video_bytes: bytes, file_name: str, download_key: str):
     st.markdown("#### ✓ Video created successfully")
-    st.caption("Your video is ready.")
+    st.caption("Your video is ready — preview it below.")
     st.video(video_bytes)
     st.markdown(f'<span class="vf-meta">File: <code>{file_name}</code></span>', unsafe_allow_html=True)
-    col1, col2 = st.columns(2)
-    with col1:
-        st.download_button(
-            "⬇ Download Video",
-            data=video_bytes,
-            file_name=file_name,
-            mime="video/mp4",
-            type="primary",
-            use_container_width=True,
-            key=download_key,
-        )
-    with col2:
-        if st.button("+ Create Another", key=clear_key, use_container_width=True):
-            on_clear()
-            st.rerun()
+    st.download_button(
+        "⬇ Download Video",
+        data=video_bytes,
+        file_name=file_name,
+        mime="video/mp4",
+        type="primary",
+        key=download_key,
+    )
 
 
 def file_list(files):
@@ -269,8 +260,7 @@ st.markdown(
         <div class="vf-hero-icon">🎬</div>
         <h1>VideoFusion</h1>
         <p class="vf-tagline">Free Video & Audio Tools</p>
-        <p class="vf-sub">Merge videos, add or replace audio, and create your final video with a
-        simple browser-based workflow.</p>
+        <p class="vf-sub">Merge videos, add audio, and create your final video with a simple workflow.</p>
     </div>
     """,
     unsafe_allow_html=True,
@@ -292,7 +282,9 @@ if not ffmpeg_path or not ffprobe_path:
 
 
 # ---------------------------------------------------------------------------
-# Operation picker: cards + compact selector, sharing one source of truth
+# Operation picker: the three cards are the ONLY visible selector.
+# The dropdown value still lives in session_state internally (no visible
+# widget), so the rest of the app can keep branching on one variable.
 # ---------------------------------------------------------------------------
 st.session_state.setdefault("current_operation", OPERATIONS[0])
 
@@ -312,7 +304,7 @@ for col, card in zip(card_cols, CARDS):
             st.markdown(f'<div class="vf-card-desc">{card["desc"]}</div>', unsafe_allow_html=True)
             is_active = st.session_state.current_operation == card["key"]
             st.button(
-                card["button"],
+                f'{card["key"]} →',
                 key=f"card_{card['key']}",
                 on_click=set_operation,
                 args=(card["key"],),
@@ -320,17 +312,7 @@ for col, card in zip(card_cols, CARDS):
                 type="primary" if is_active else "secondary",
             )
 
-_, sel_col, _ = st.columns([1, 2, 1])
-with sel_col:
-    st.selectbox(
-        "Choose an operation",
-        OPERATIONS,
-        key="current_operation",
-        label_visibility="collapsed",
-    )
-
 operation = st.session_state.current_operation
-st.divider()
 
 
 # ---------------------------------------------------------------------------
@@ -340,21 +322,28 @@ if operation == "Merge Videos":
     for key, default in {"mv_uploader_key": 0, "mv_result_bytes": None, "mv_result_name": None}.items():
         st.session_state.setdefault(key, default)
 
-    st.markdown('<div class="vf-op-title">Merge Videos Online</div>', unsafe_allow_html=True)
+    st.markdown('<div class="vf-section"></div>', unsafe_allow_html=True)
+    st.markdown('<div class="vf-op-title">Merge Videos</div>', unsafe_allow_html=True)
     st.markdown('<div class="vf-op-desc">Combine multiple video files into one video.</div>', unsafe_allow_html=True)
-    st.caption(f"Supported formats: {' • '.join(t.upper() for t in SUPPORTED_VIDEO_TYPES)}  •  Maximum: {MAX_FILE_MB} MB per file")
 
     mv_files = st.file_uploader(
-        "Drop your videos here or browse files",
+        "Drag & drop your videos here",
         type=SUPPORTED_VIDEO_TYPES,
         accept_multiple_files=True,
         key=f"mv_uploader_{st.session_state.mv_uploader_key}",
+        help=f"Supported: {', '.join(t.upper() for t in SUPPORTED_VIDEO_TYPES)}. Maximum {MAX_FILE_MB} MB per file.",
     )
 
+    mv_ready = bool(mv_files) and len(mv_files) >= 2
+    mv_edited_df = None
+
     if mv_files:
-        st.write("Selected files:")
+        st.write("Your videos:")
         file_list(mv_files)
 
+    if not mv_ready:
+        st.info("Add at least 2 videos to merge.")
+    else:
         default_order = sorted(
             range(len(mv_files)), key=lambda i: natural_sort_key(Path(mv_files[i].name))
         )
@@ -365,8 +354,8 @@ if operation == "Merge Videos":
                 "File": [f.name for f in mv_files],
             }
         )
-        st.caption("Edit the Order column to control the sequence (lower number = earlier in the video). "
-                    "To remove a file, use the × on its entry in the uploader above.")
+        st.caption("The order below is the order clips appear in the merged video — edit the Order "
+                    "column to rearrange. To remove a file, use the × on its entry above.")
         mv_edited_df = st.data_editor(
             order_df,
             hide_index=True,
@@ -391,35 +380,32 @@ if operation == "Merge Videos":
                 mv_output_name += ".mp4"
 
         if st.button("🎬 Merge Videos", type="primary", key="mv_merge_btn"):
-            if len(mv_files) < 2:
-                st.warning("Please add at least 2 videos to merge.")
-            else:
-                ordered_positions = mv_edited_df.sort_values("Order", kind="stable").index.tolist()
-                ordered_files = [mv_files[i] for i in ordered_positions]
-                status = st.status("Processing your video... please wait while VideoFusion creates your file.", expanded=True)
-                try:
-                    result_bytes = run_video_merge(
-                        ordered_files, mv_crf, mv_preset, mv_output_name, ffmpeg_path, ffprobe_path, status
-                    )
-                    status.update(label="Merge complete", state="complete")
-                    st.session_state.mv_result_bytes = result_bytes
-                    st.session_state.mv_result_name = mv_output_name
-                except MergeError as e:
-                    status.update(label="Merge failed", state="error")
-                    show_error("We couldn't merge these videos. Please check the files and try again.", str(e))
-                except Exception as e:  # noqa: BLE001 - friendly message instead of a raw traceback
-                    status.update(label="Merge failed", state="error")
-                    show_error("Something went wrong while processing your files. Please try again.", str(e))
-    else:
-        st.info("Upload two or more videos to get started.")
+            ordered_positions = mv_edited_df.sort_values("Order", kind="stable").index.tolist()
+            ordered_files = [mv_files[i] for i in ordered_positions]
+            status = st.status("Processing your videos... please wait while VideoFusion creates your file.", expanded=True)
+            try:
+                result_bytes = run_video_merge(
+                    ordered_files, mv_crf, mv_preset, mv_output_name, ffmpeg_path, ffprobe_path, status
+                )
+                status.update(label="Merge complete", state="complete")
+                st.session_state.mv_result_bytes = result_bytes
+                st.session_state.mv_result_name = mv_output_name
+            except MergeError as e:
+                status.update(label="Merge failed", state="error")
+                show_error("We couldn't merge these videos. Please check the files and try again.", str(e))
+            except Exception as e:  # noqa: BLE001 - friendly message instead of a raw traceback
+                status.update(label="Merge failed", state="error")
+                show_error("Something went wrong while processing your files. Please try again.", str(e))
 
     if st.session_state.mv_result_bytes:
-        def _clear_mv():
+        show_output(st.session_state.mv_result_bytes, st.session_state.mv_result_name, "mv_download")
+
+    if mv_files or st.session_state.mv_result_bytes:
+        if st.button("↻ Clear Selection", key="mv_clear_btn"):
             st.session_state.mv_uploader_key += 1
             st.session_state.mv_result_bytes = None
             st.session_state.mv_result_name = None
-
-        show_output(st.session_state.mv_result_bytes, st.session_state.mv_result_name, "mv_download", "mv_clear_btn", _clear_mv)
+            st.rerun()
 
 
 # ---------------------------------------------------------------------------
@@ -432,32 +418,30 @@ elif operation == "Add / Replace Audio":
     }.items():
         st.session_state.setdefault(key, default)
 
-    st.markdown('<div class="vf-op-title">Add Audio to Video</div>', unsafe_allow_html=True)
+    st.markdown('<div class="vf-section"></div>', unsafe_allow_html=True)
+    st.markdown('<div class="vf-op-title">Add / Replace Audio</div>', unsafe_allow_html=True)
     st.markdown('<div class="vf-op-desc">Add music, narration, or another audio track to your video.</div>', unsafe_allow_html=True)
-    st.caption(
-        f"Video formats: {' • '.join(t.upper() for t in SUPPORTED_VIDEO_TYPES)}  •  "
-        f"Audio formats: {' • '.join(t.upper() for t in SUPPORTED_AUDIO_TYPES)}  •  "
-        f"Maximum: {MAX_FILE_MB} MB per file"
-    )
 
     col_v, col_a = st.columns(2, gap="medium")
     with col_v:
         st.markdown("**Video**")
         aa_video = st.file_uploader(
-            "Drop your video here or browse files",
+            "Drag & drop your video here",
             type=SUPPORTED_VIDEO_TYPES,
             accept_multiple_files=False,
             key=f"aa_video_uploader_{st.session_state.aa_video_uploader_key}",
+            help=f"Supported: {', '.join(t.upper() for t in SUPPORTED_VIDEO_TYPES)}. Maximum {MAX_FILE_MB} MB.",
         )
         if aa_video:
             st.markdown(f"✓ **{aa_video.name}**")
     with col_a:
         st.markdown("**Audio**")
         aa_audio = st.file_uploader(
-            "Drop your audio here or browse files",
+            "Drag & drop your audio here",
             type=SUPPORTED_AUDIO_TYPES,
             accept_multiple_files=False,
             key=f"aa_audio_uploader_{st.session_state.aa_audio_uploader_key}",
+            help=f"Supported: {', '.join(t.upper() for t in SUPPORTED_AUDIO_TYPES)}. Maximum {MAX_FILE_MB} MB.",
         )
         if aa_audio:
             st.markdown(f"✓ **{aa_audio.name}**")
@@ -473,20 +457,20 @@ elif operation == "Add / Replace Audio":
         unsafe_allow_html=True,
     )
 
-    aa_output_name = st.text_input(
-        "Output filename",
-        (Path(aa_video.name).stem + "_with_audio.mp4") if aa_video else "video_with_audio.mp4",
-        key="aa_output_name",
-    ).strip() or "video_with_audio.mp4"
-    if not aa_output_name.lower().endswith(".mp4"):
-        aa_output_name += ".mp4"
+    aa_ready = bool(aa_video) and bool(aa_audio)
 
-    if st.button("🎵 Add Audio", type="primary", key="aa_merge_btn"):
-        if not aa_video:
-            st.warning("Please select a video to continue.")
-        elif not aa_audio:
-            st.warning("Please select an audio file to continue.")
-        else:
+    if not aa_ready:
+        st.info("Add 1 video and 1 audio file to continue.")
+    else:
+        aa_output_name = st.text_input(
+            "Output filename",
+            Path(aa_video.name).stem + "_with_audio.mp4",
+            key="aa_output_name",
+        ).strip() or "video_with_audio.mp4"
+        if not aa_output_name.lower().endswith(".mp4"):
+            aa_output_name += ".mp4"
+
+        if st.button("🎵 Add / Replace Audio", type="primary", key="aa_merge_btn"):
             status = st.status("Processing your video... please wait while VideoFusion creates your file.", expanded=True)
             try:
                 result_bytes = run_audio_merge(
@@ -503,13 +487,15 @@ elif operation == "Add / Replace Audio":
                 show_error("Something went wrong while processing your files. Please try again.", str(e))
 
     if st.session_state.aa_result_bytes:
-        def _clear_aa():
+        show_output(st.session_state.aa_result_bytes, st.session_state.aa_result_name, "aa_download")
+
+    if aa_video or aa_audio or st.session_state.aa_result_bytes:
+        if st.button("↻ Clear Selection", key="aa_clear_btn"):
             st.session_state.aa_video_uploader_key += 1
             st.session_state.aa_audio_uploader_key += 1
             st.session_state.aa_result_bytes = None
             st.session_state.aa_result_name = None
-
-        show_output(st.session_state.aa_result_bytes, st.session_state.aa_result_name, "aa_download", "aa_clear_btn", _clear_aa)
+            st.rerun()
 
 
 # ---------------------------------------------------------------------------
@@ -522,58 +508,30 @@ elif operation == "Merge Videos + Audio":
     }.items():
         st.session_state.setdefault(key, default)
 
-    st.markdown('<div class="vf-op-title">Merge Videos + Add Audio</div>', unsafe_allow_html=True)
+    st.markdown('<div class="vf-section"></div>', unsafe_allow_html=True)
+    st.markdown('<div class="vf-op-title">Merge Videos + Audio</div>', unsafe_allow_html=True)
     st.markdown('<div class="vf-op-desc">Combine multiple videos and add an audio track, in one step.</div>', unsafe_allow_html=True)
-    st.caption(
-        f"Video formats: {' • '.join(t.upper() for t in SUPPORTED_VIDEO_TYPES)}  •  "
-        f"Audio formats: {' • '.join(t.upper() for t in SUPPORTED_AUDIO_TYPES)}  •  "
-        f"Maximum: {MAX_FILE_MB} MB per file"
-    )
 
     st.markdown("**Video files**")
     mva_files = st.file_uploader(
-        "Drop your videos here or browse files",
+        "Drag & drop your videos here",
         type=SUPPORTED_VIDEO_TYPES,
         accept_multiple_files=True,
         key=f"mva_video_uploader_{st.session_state.mva_video_uploader_key}",
+        help=f"Supported: {', '.join(t.upper() for t in SUPPORTED_VIDEO_TYPES)}. Maximum {MAX_FILE_MB} MB per file.",
     )
 
-    mva_edited_df = None
     if mva_files:
-        st.write("Selected files:")
+        st.write("Your videos:")
         file_list(mva_files)
-
-        default_order = sorted(
-            range(len(mva_files)), key=lambda i: natural_sort_key(Path(mva_files[i].name))
-        )
-        order_lookup = {file_index: position + 1 for position, file_index in enumerate(default_order)}
-        order_df = pd.DataFrame(
-            {
-                "Order": [order_lookup[i] for i in range(len(mva_files))],
-                "File": [f.name for f in mva_files],
-            }
-        )
-        st.caption("Edit the Order column to control the sequence (lower number = earlier in the video). "
-                    "To remove a file, use the × on its entry in the uploader above.")
-        mva_edited_df = st.data_editor(
-            order_df,
-            hide_index=True,
-            use_container_width=True,
-            column_config={
-                "Order": st.column_config.NumberColumn(min_value=1, step=1),
-                "File": st.column_config.TextColumn(disabled=True),
-            },
-            key=f"mva_order_editor_{st.session_state.mva_video_uploader_key}",
-        )
-    else:
-        st.info("Upload two or more videos to get started.")
 
     st.markdown("**Audio file**")
     mva_audio = st.file_uploader(
-        "Drop your audio here or browse files",
+        "Drag & drop your audio here",
         type=SUPPORTED_AUDIO_TYPES,
         accept_multiple_files=False,
         key=f"mva_audio_uploader_{st.session_state.mva_audio_uploader_key}",
+        help=f"Supported: {', '.join(t.upper() for t in SUPPORTED_AUDIO_TYPES)}. Maximum {MAX_FILE_MB} MB.",
     )
     if mva_audio:
         st.markdown(f"✓ **{mva_audio.name}**")
@@ -588,27 +546,51 @@ elif operation == "Merge Videos + Audio":
         unsafe_allow_html=True,
     )
 
-    with st.expander("Advanced settings"):
-        mva_crf = st.slider("Quality (CRF) — lower is better quality, larger file", 14, 28, 18, key="mva_crf")
-        mva_preset = st.selectbox(
-            "Encoding preset (slower = better compression at same quality)",
-            ["slow", "medium", "fast", "veryfast"],
-            index=0,
-            key="mva_preset",
-        )
-        mva_output_name = st.text_input("Output filename", "final_output.mp4", key="mva_output_name").strip() or "final_output.mp4"
-        if not mva_output_name.lower().endswith(".mp4"):
-            mva_output_name += ".mp4"
+    mva_ready = bool(mva_files) and len(mva_files) >= 2 and bool(mva_audio)
+    mva_edited_df = None
 
-    if st.button("🎬🎵 Merge Videos + Add Audio", type="primary", key="mva_merge_btn"):
-        if not mva_files or len(mva_files) < 2:
-            st.warning("Please add at least 2 videos to merge.")
-        elif not mva_audio:
-            st.warning("Please select an audio file to continue.")
-        else:
+    if not mva_ready:
+        st.info("Add at least 2 videos and 1 audio file to continue.")
+    else:
+        default_order = sorted(
+            range(len(mva_files)), key=lambda i: natural_sort_key(Path(mva_files[i].name))
+        )
+        order_lookup = {file_index: position + 1 for position, file_index in enumerate(default_order)}
+        order_df = pd.DataFrame(
+            {
+                "Order": [order_lookup[i] for i in range(len(mva_files))],
+                "File": [f.name for f in mva_files],
+            }
+        )
+        st.caption("The order below is the order clips appear in the merged video — edit the Order "
+                    "column to rearrange. To remove a file, use the × on its entry above.")
+        mva_edited_df = st.data_editor(
+            order_df,
+            hide_index=True,
+            use_container_width=True,
+            column_config={
+                "Order": st.column_config.NumberColumn(min_value=1, step=1),
+                "File": st.column_config.TextColumn(disabled=True),
+            },
+            key=f"mva_order_editor_{st.session_state.mva_video_uploader_key}",
+        )
+
+        with st.expander("Advanced settings"):
+            mva_crf = st.slider("Quality (CRF) — lower is better quality, larger file", 14, 28, 18, key="mva_crf")
+            mva_preset = st.selectbox(
+                "Encoding preset (slower = better compression at same quality)",
+                ["slow", "medium", "fast", "veryfast"],
+                index=0,
+                key="mva_preset",
+            )
+            mva_output_name = st.text_input("Output filename", "final_output.mp4", key="mva_output_name").strip() or "final_output.mp4"
+            if not mva_output_name.lower().endswith(".mp4"):
+                mva_output_name += ".mp4"
+
+        if st.button("🎬🎵 Merge Videos + Audio", type="primary", key="mva_merge_btn"):
             ordered_positions = mva_edited_df.sort_values("Order", kind="stable").index.tolist()
             ordered_files = [mva_files[i] for i in ordered_positions]
-            status = st.status("Processing your video... please wait while VideoFusion creates your file.", expanded=True)
+            status = st.status("Processing your videos... please wait while VideoFusion creates your file.", expanded=True)
             try:
                 merged_bytes = run_video_merge(
                     ordered_files, mva_crf, mva_preset, "merged_intermediate.mp4", ffmpeg_path, ffprobe_path, status
@@ -627,32 +609,36 @@ elif operation == "Merge Videos + Audio":
                 show_error("Something went wrong while processing your files. Please try again.", str(e))
 
     if st.session_state.mva_result_bytes:
-        def _clear_mva():
+        show_output(st.session_state.mva_result_bytes, st.session_state.mva_result_name, "mva_download")
+
+    if mva_files or mva_audio or st.session_state.mva_result_bytes:
+        if st.button("↻ Clear Selection", key="mva_clear_btn"):
             st.session_state.mva_video_uploader_key += 1
             st.session_state.mva_audio_uploader_key += 1
             st.session_state.mva_result_bytes = None
             st.session_state.mva_result_name = None
-
-        show_output(st.session_state.mva_result_bytes, st.session_state.mva_result_name, "mva_download", "mva_clear_btn", _clear_mva)
+            st.rerun()
 
 
 # ---------------------------------------------------------------------------
 # Trust section
 # ---------------------------------------------------------------------------
-st.divider()
+st.markdown('<div class="vf-section"></div>', unsafe_allow_html=True)
 st.markdown('<h2 class="vf-section-title">Why use VideoFusion?</h2>', unsafe_allow_html=True)
 
-trust_cols = st.columns(4, gap="medium")
-trust_items = [
-    ("🆓", "Free to use", "Simple browser-based video and audio tools, no account required."),
-    ("⚡", "Simple", "No complicated video editor — pick a tool and upload your files."),
-    ("🎬", "Multiple formats", "Supports common video formats like MP4, MOV, MKV, and more."),
-    ("🎵", "Audio support", "Supports common audio formats like MP3, WAV, AAC, and more."),
+benefit_cols = st.columns(4, gap="medium")
+benefits = [
+    ("🆓", "Free to Use", "Use the available VideoFusion tools without a paid subscription."),
+    ("⚡", "Simple Workflow", "Upload your files, choose an operation, and create your result."),
+    ("🎬", "Video Tools", "Merge multiple video files into one video."),
+    ("🎵", "Audio Tools", "Add or replace an audio track in your video."),
 ]
-for col, (icon, title, desc) in zip(trust_cols, trust_items):
+for col, (icon, title, desc) in zip(benefit_cols, benefits):
     with col:
-        st.markdown(f"**{icon} {title}**")
-        st.caption(desc)
+        with st.container(border=True):
+            st.markdown(f'<div class="vf-card-icon">{icon}</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="vf-benefit-title">{title}</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="vf-benefit-desc">{desc}</div>', unsafe_allow_html=True)
 
 st.markdown(
     """
@@ -667,30 +653,31 @@ st.markdown(
 
 
 # ---------------------------------------------------------------------------
-# SEO-friendly content
+# Video & Audio Tools
 # ---------------------------------------------------------------------------
-st.divider()
+st.markdown('<div class="vf-section"></div>', unsafe_allow_html=True)
 st.markdown('<h2 class="vf-section-title">Video & Audio Tools</h2>', unsafe_allow_html=True)
-st.markdown(
-    """
-    VideoFusion helps you combine video files and work with audio tracks using simple,
-    browser-based tools — a free video merger and audio-and-video tool for everyday editing tasks.
 
-    **Merge Videos** — Combine multiple videos into one, in the order you choose, to merge
-    videos online without installing software.
-
-    **Add Audio to Video** — Add or replace the audio track of a video with music, narration,
-    or any audio file.
-
-    **Merge Videos + Audio** — Merge video and audio in a single step: combine several clips
-    and attach an audio track to the result.
-    """
-)
+tool_cols = st.columns(3, gap="medium")
+for col, card in zip(tool_cols, CARDS):
+    with col:
+        with st.container(border=True):
+            st.markdown(f'<div class="vf-card-icon">{card["icon"]}</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="vf-card-title">{card["title"]}</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="vf-card-desc">{card["desc"]}</div>', unsafe_allow_html=True)
+            st.button(
+                "Use Tool →",
+                key=f"tool_{card['key']}",
+                on_click=set_operation,
+                args=(card["key"],),
+                use_container_width=True,
+            )
 
 
 # ---------------------------------------------------------------------------
 # FAQ
 # ---------------------------------------------------------------------------
+st.markdown('<div class="vf-section"></div>', unsafe_allow_html=True)
 st.markdown('<h2 class="vf-section-title">Frequently Asked Questions</h2>', unsafe_allow_html=True)
 
 faqs = [
@@ -699,24 +686,31 @@ faqs = [
         f"VideoFusion supports {', '.join(t.upper() for t in SUPPORTED_VIDEO_TYPES)}.",
     ),
     (
-        "Can I merge multiple videos?",
-        "Yes. Upload two or more videos in the Merge Videos or Merge Videos + Audio tool, "
-        "set the order you want, and click merge.",
+        "How many videos can I merge?",
+        "You can merge two or more videos at once — there's no fixed maximum, though very large "
+        f"batches take longer to process, and each file is limited to {MAX_FILE_MB} MB.",
     ),
     (
-        "Can I add music to a video?",
+        "Can I add audio to a video?",
         "Yes. Use Add / Replace Audio to attach an audio file to a single video, or "
         "Merge Videos + Audio to do it as part of a merge.",
     ),
     (
-        "What happens if my audio is shorter than my video?",
-        "The video's length and visuals are kept exactly as they are — the remaining time "
-        "after the audio ends is filled with silence.",
+        "Can I replace the existing audio?",
+        "Yes. Add / Replace Audio always replaces the video's existing audio track with the "
+        "audio file you select.",
     ),
     (
-        "What happens if my audio is longer than my video?",
-        "The audio is trimmed to match the video's duration, so the final video is never "
-        "made longer than the original video.",
+        "Does VideoFusion preserve video quality?",
+        "When merging, clips are re-encoded to a consistent Full HD format using an adjustable "
+        "quality setting (CRF, available under Advanced settings). When only replacing audio on a "
+        "single video, the video stream is copied without re-encoding, so its quality is unchanged.",
+    ),
+    (
+        "How are uploaded files handled?",
+        "Uploaded files and generated videos are processed in a temporary working area for your "
+        "session and are not kept in a database. Download your result before starting a new "
+        "operation or closing the tab.",
     ),
     (
         "Is VideoFusion free?",
@@ -726,3 +720,20 @@ faqs = [
 for question, answer in faqs:
     with st.expander(question):
         st.write(answer)
+
+
+# ---------------------------------------------------------------------------
+# Footer
+# ---------------------------------------------------------------------------
+st.divider()
+st.markdown(
+    """
+    <div class="vf-footer">
+        🎬 <b>VideoFusion</b><br>
+        Free Video &amp; Audio Tools<br>
+        Merge Videos • Add / Replace Audio • Merge Videos + Audio<br>
+        © 2026 VideoFusion
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
