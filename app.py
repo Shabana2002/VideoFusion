@@ -7,8 +7,9 @@ command-line tool (merge_videos.py) - normalize+concat for merging clips,
 and apad/-t duration matching for replacing a video's audio track.
 """
 
-from pathlib import Path
+import sys
 import tempfile
+from pathlib import Path
 
 import pandas as pd
 import streamlit as st
@@ -56,6 +57,58 @@ CARDS = [
         "desc": "Combine multiple videos and add an audio track.",
     },
 ]
+
+GOOGLE_SITE_VERIFICATION_TAG = (
+    '<meta name="google-site-verification" '
+    'content="vEkcKBmYsFhMxHiw9JT1by-mMU7p3A-pEFfN3Zg-FZs" />'
+)
+
+
+def _ensure_google_site_verification() -> None:
+    """Insert the Search Console verification tag into Streamlit's served
+    index.html <head>.
+
+    Streamlit has no supported API to write into <head> - anything added
+    via st.markdown only lands in the React-rendered <body>, after the
+    page has already loaded, which Search Console's plain HTTP fetch never
+    sees. Patching the bundled index.html (reinstalled fresh from
+    requirements.txt on every deploy, so this is idempotent by
+    construction) is the only way to reach it.
+
+    This must never crash the app if it fails (e.g. a future Streamlit
+    version restructures this file), but a failure must not be invisible
+    either: it's logged to stderr - which Streamlit Cloud surfaces in the
+    app's deploy logs - and, only in that failure case, flagged in the UI
+    with st.warning so it's obvious verification isn't configured.
+    """
+    try:
+        index_path = Path(st.__file__).parent / "static" / "index.html"
+        html = index_path.read_text(encoding="utf-8")
+
+        if GOOGLE_SITE_VERIFICATION_TAG in html:
+            return  # already inserted on a previous run - nothing to do
+
+        if "<head>" not in html:
+            raise ValueError(f"no <head> tag found in {index_path}")
+
+        patched_html = html.replace(
+            "<head>", f"<head>\n    {GOOGLE_SITE_VERIFICATION_TAG}", 1
+        )
+        index_path.write_text(patched_html, encoding="utf-8")
+
+    except Exception as exc:
+        print(
+            "[VideoFusion] Could not add the Google Search Console verification "
+            f"tag to Streamlit's index.html: {exc!r}",
+            file=sys.stderr,
+        )
+        st.warning(
+            "Google Search Console verification could not be configured "
+            "automatically. Check the app's deploy logs for details."
+        )
+
+
+_ensure_google_site_verification()
 
 st.set_page_config(
     page_title="Free Video & Audio Tools | VideoFusion",
