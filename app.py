@@ -291,7 +291,19 @@ st.session_state.setdefault("current_operation", OPERATIONS[0])
 
 def set_operation(op: str):
     st.session_state.current_operation = op
+    st.session_state["_scroll_to_workspace"] = True
+    st.toast(f"Switched to {op}", icon="✅")
 
+
+if st.session_state.pop("_scroll_to_workspace", False):
+    # The "Use Tool" cards further down the page change the same operation
+    # state as the cards up here - without this, clicking one changes the
+    # workspace above without moving the user's scroll position, which
+    # looks like the button did nothing.
+    st.components.v1.html(
+        "<script>window.parent.scrollTo({top: 0, behavior: 'smooth'});</script>",
+        height=0,
+    )
 
 st.markdown('<h2 class="vf-section-title">WHAT DO YOU WANT TO DO?</h2>', unsafe_allow_html=True)
 
